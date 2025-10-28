@@ -15,7 +15,7 @@ namespace HW17.Infrastructure.EfCore.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=HW17;User ID=sa;Password=Az@r4180;Trust Server Certificate=True ");
+            optionsBuilder.UseSqlServer("");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
