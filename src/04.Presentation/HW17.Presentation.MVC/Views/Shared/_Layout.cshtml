@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HW17.Presentation.MVC</title>
+    <script type="importmap"></script>
+    <style>
+        *{
+            font-family: "Vazirmatn", sans-serif;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            list-style: none;
+    
+        }
+        li,a {
+            font-size: 16px;
+            font-weight: 500;
+            color: #787878;
+            text-decoration: none;
+        }
+        header button{
+            background-color: rgb(37, 37, 172);
+            color: white;
+            font-size: 15px;
+            font-weight: 500;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+
+        }
+        .main-container{
+            
+            padding: 0 80px;
+        }
+        header{
+            height: 50px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+            position: fixed;
+            top: 0;
+            background-color: white;
+        }
+        
+        .nav-item{
+            display: inline-block;
+            margin: 0px 10px;
+        }
+        .footer-container {
+            width: 100%;
+            height: 50px;
+            background-color: rgb(33, 36, 50);
+            color: white;
+            text-align: center;
+            padding : 10px ;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <button type="button">
+            <span>ورود</span>
+            </button>
+        </div>
+        <nav>
+            <div class="nav-items" >
+                <div>
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">صفحه اصلی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">فروشگاه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">دسته بندی ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">نوشتارها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">درباره ما</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">تماس با ما</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+    </header>
+    <div class="main-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            &copy; 2025 - HW17.Presentation.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">خانه کتاب | منبع آموزش و مطالعه</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
