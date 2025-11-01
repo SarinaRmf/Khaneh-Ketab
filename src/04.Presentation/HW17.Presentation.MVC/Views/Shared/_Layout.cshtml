@@ -37,6 +37,7 @@
         .main-container{
             
             padding: 0 80px;
+            margin-top: 120px;
         }
         header{
             height: 50px;
@@ -63,15 +64,28 @@
             text-align: center;
             padding : 10px ;
         }
-
+        .nav-items ul{
+            display: flex;
+            flex-direction: row-reverse;
+        }
+        .nav-buttons{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <div>
-            <button type="button">
-            <span>ورود</span>
-            </button>
+        <div class ="nav-buttons">
+            <a asp-controller="Book" asp-action="Add">
+                <button type="button">افزودن کتاب</button>
+            </a>
+
+            <a asp-controller="Account" asp-action="Login">
+                <button type="button">ورود</button>
+            </a>
         </div>
         <nav>
             <div class="nav-items" >
@@ -81,7 +95,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">صفحه اصلی</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">فروشگاه</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="GetBooks">فروشگاه</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">دسته بندی ها</a>
@@ -118,4 +132,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-

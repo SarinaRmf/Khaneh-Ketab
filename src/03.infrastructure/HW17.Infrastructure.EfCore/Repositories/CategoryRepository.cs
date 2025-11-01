@@ -20,6 +20,7 @@ namespace HW17.Infrastructure.EfCore.Repositories
         { 
             return _context.Categories.Select(c => new GetCategoryDto
             {
+                Id = c.Id,  
                 Name = c.Name,
                 Description = c.Description,
                 ImagePath = c.ImagePath,

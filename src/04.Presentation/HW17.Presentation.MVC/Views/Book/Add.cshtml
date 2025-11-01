@@ -1,0 +1,117 @@
+﻿@using HW17.Domain.DTOs
+@using HW17.Domain.Entities
+@model CreateBookDto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<head>
+    <style>
+        h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    max-width: 450px;
+    margin: auto;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: 600;
+    display: inline-block;
+    width: 100%;
+    text-align: right; 
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    text-align: right; 
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108,99,255,0.4);
+}
+
+button {
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5750d9;
+}
+    </style>
+</head>
+
+
+<h2>افزودن کتاب</h2>
+<form action="Add" method="post" enctype="multipart/form-data" >
+    <div>
+        <label asp-for="Title">عنوان</label><br>
+        <input type="text" placeholder="مثلاً: شازده کوچولو" asp-for="Title"><br>
+    </div>
+
+    <div>  
+        <label asp-for="Auther">نویسنده</label><br>
+        <input type="text" asp-for="Auther"  placeholder="مثلاً: آنتوان دو سنت اگزوپری">
+    </div>
+
+    <div>
+        <label asp-for="PageCount">تعداد صفحات</label><br>
+        <input type="number" asp-for="PageCount"  placeholder="مثلا: 120">
+    </div>
+
+    <div>
+        <label asp-for="Price">قیمت</label><br>
+        <input type="number" asp-for="Price"  placeholder="مثلاً:450000">
+    </div>
+
+    <div>
+        <select asp-for="CategoryId">
+            @foreach(var item in (List<GetCategoryDto>)ViewBag.Categories)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="ImagePath">عکس</label><br>
+        <input type="file" asp-for="ImageFile">
+    </div>
+
+    <div>
+        <button type="submit" class="btn">افزودن کتاب</button>
+    </div>
+
+</form>

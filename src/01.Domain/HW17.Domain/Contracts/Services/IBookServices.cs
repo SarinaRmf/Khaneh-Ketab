@@ -10,5 +10,7 @@ namespace HW17.Domain.Contracts.Services
     public interface IBookServices
     {
         List<GetBookDtos> GetNewestBooks();
+        List<GetBookDtos> GetBooks();
+        void Add(CreateBookDto dto);
     }
 }
