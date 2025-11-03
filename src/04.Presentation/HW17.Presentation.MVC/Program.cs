@@ -12,8 +12,7 @@ namespace HW17.Presentation.MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
-            //builder.Services.AddScoped<IBookServices, BookServices>();
-            //builder.Services.AddScoped<ICategoryServices, CategoryServices>();
+            
 
 
             var app = builder.Build();

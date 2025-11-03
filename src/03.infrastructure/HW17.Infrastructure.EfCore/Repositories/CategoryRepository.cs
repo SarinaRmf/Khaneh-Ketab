@@ -1,6 +1,8 @@
 ﻿using HW17.Domain.Contracts.Repositories;
 using HW17.Domain.DTOs;
+using HW17.Domain.Entities;
 using HW17.Infrastructure.EfCore.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,30 @@ namespace HW17.Infrastructure.EfCore.Repositories
                 Description = c.Description,
                 ImagePath = c.ImagePath,
             }).ToList();
+        }
+        public void Delete(int categoryId)
+        {
+
+            _context.Categories.Where(c => c.Id == categoryId).ExecuteDelete();
+        }
+
+        public bool Add(CreateCategoryDto categoryDto)
+        {
+            var entity = new Category
+            {
+                Name = categoryDto.Name,
+                Description = categoryDto.Description,
+                ImagePath = categoryDto.ImagePath,
+                CreatedAt = DateTime.Now,
+
+            };
+            _context.Categories.Add(entity);    
+            return _context.SaveChanges() > 0;
+        }
+
+        public bool ExistBefore(string categoryName)
+        {
+            return _context.Categories.Any(c => c.Name == categoryName);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36401.2 d17.14
+VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -22,6 +22,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW17.Presentation.ConsoleApp", "src\04.Presentation\HW17.Presentation.ConsoleApp\HW17.Presentation.ConsoleApp.csproj", "{8B714792-E299-468D-98F5-CECAFADF4615}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW17.Presentation.MVC", "src\04.Presentation\HW17.Presentation.MVC\HW17.Presentation.MVC.csproj", "{A132BBCF-818E-4E71-BD76-5C5652EAAF28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Framework", "00.Framework", "{2F81E6B9-BACF-4A72-BF1D-D4E79BFF7F38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW17.Framework", "src\00.Framework\HW17.Framework\HW17.Framework.csproj", "{3FE497F5-8778-491B-B1FA-DB656D5D0E4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,10 @@ Global
 		{A132BBCF-818E-4E71-BD76-5C5652EAAF28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A132BBCF-818E-4E71-BD76-5C5652EAAF28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A132BBCF-818E-4E71-BD76-5C5652EAAF28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FE497F5-8778-491B-B1FA-DB656D5D0E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FE497F5-8778-491B-B1FA-DB656D5D0E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FE497F5-8778-491B-B1FA-DB656D5D0E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FE497F5-8778-491B-B1FA-DB656D5D0E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +71,8 @@ Global
 		{FCA49713-0004-475B-A2FE-E7DF62E2E615} = {FC7E6C8B-674D-402B-8EE8-9ABE44577C91}
 		{8B714792-E299-468D-98F5-CECAFADF4615} = {87592331-E656-48D3-80DF-38DA86221965}
 		{A132BBCF-818E-4E71-BD76-5C5652EAAF28} = {87592331-E656-48D3-80DF-38DA86221965}
+		{2F81E6B9-BACF-4A72-BF1D-D4E79BFF7F38} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{3FE497F5-8778-491B-B1FA-DB656D5D0E4C} = {2F81E6B9-BACF-4A72-BF1D-D4E79BFF7F38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8932D45D-880D-4B2D-B709-E90DEA1033B0}

@@ -9,24 +9,14 @@ namespace HW17.Services
 {
     public class FileService 
     {
-        public void Delete(string fileName)
-        {
-            if (string.IsNullOrWhiteSpace(fileName))
-                return;
-
-            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fileName);
-
-            if (File.Exists(fullPath))
-            {
-                File.Delete(fullPath);
-            }
-        }
 
 
         public string Upload(IFormFile file, string folder)
         {
+            if (file == null || file.Length == 0)
+                return null;
 
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "books");
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", folder);
 
             if (!Directory.Exists(uploadsFolder))
                 Directory.CreateDirectory(uploadsFolder);
@@ -41,7 +31,7 @@ namespace HW17.Services
                 file.CopyTo(stream);
             }
 
-            return $"{Path.Combine("/images", "books", uniqueFileName)}";
+            return $"/images/{folder}/{uniqueFileName}";
         }
     }
 }

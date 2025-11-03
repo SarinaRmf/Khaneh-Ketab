@@ -10,5 +10,8 @@ namespace HW17.Domain.Contracts.Repositories
     public interface ICategoryRepository
     {
         List<GetCategoryDto> GetCategories();
+        void Delete(int categoryId);
+        bool Add(CreateCategoryDto categoryDto);
+        bool ExistBefore(string categoryName);
     }
 }

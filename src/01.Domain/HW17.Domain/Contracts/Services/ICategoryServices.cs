@@ -10,5 +10,7 @@ namespace HW17.Domain.Contracts.Services
     public interface ICategoryServices
     {
         List<GetCategoryDto> GetCategories();
+        void Delete(int categoryId);
+        ResultDto<bool> Add(CreateCategoryDto createCategoryDto);
     }
 }

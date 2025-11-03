@@ -34,8 +34,19 @@
             cursor: pointer;
 
         }
+        html, body {
+             height: 100%;
+        }
+
+        body {
+             display: flex;
+             flex-direction: column;
+        }
         .main-container{
-            
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 0 80px;
             margin-top: 120px;
         }
