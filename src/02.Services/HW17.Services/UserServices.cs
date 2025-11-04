@@ -1,6 +1,7 @@
 ﻿using HW17.Domain.Contracts.Repositories;
 using HW17.Domain.Contracts.Services;
 using HW17.Domain.DTOs;
+using HW17.Domain.Entities;
 using HW17.Framework;
 using HW17.Infrastructure.EfCore.Repositories;
 using System;
@@ -11,16 +12,8 @@ using System.Threading.Tasks;
 
 namespace HW17.Services
 {
-    public class UserServices : IUserServices
+    public class UserServices(IUserRepository _repo, IFileService _fileService) : IUserServices
     {
-        private readonly IUserRepository _repo;
-        private readonly FileService _fileService;
-        public UserServices()
-        {
-            _repo = new UserRepository();
-            _fileService = new FileService();
-        }
-
         public List<GetUserDto> GetUsers()
         {
             return _repo.GetUsers();
@@ -57,7 +50,30 @@ namespace HW17.Services
         {
             _repo.Delete(userId);
         }
-        
-        
+
+        public GetUserDto? GetUserDetails(int userId)
+        {
+            return _repo.GetUserDetails(userId);
+        }
+
+        public bool Update(int userId, GetUserDto userDto)
+        {
+            if (userDto.ImageFile is not null)
+            {
+                var currentImageUrl = _repo.GetImageProfileUrl(userId);
+
+                if (!string.IsNullOrEmpty(currentImageUrl))
+                {
+                    _fileService.Delete(currentImageUrl);
+                    userDto.ProfilePath = _fileService.Upload(userDto.ImageFile, "Category");
+                }
+            }
+            if (userDto.Password is not null)
+            {
+                userDto.Password = userDto.Password.ToMd5Hex();
+            }
+            var result = _repo.Update(userId, userDto);
+            return result;
+        }
     }
 }

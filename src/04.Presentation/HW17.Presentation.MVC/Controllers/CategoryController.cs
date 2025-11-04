@@ -5,16 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HW17.Presentation.MVC.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController(ICategoryServices _categoryServices, ILogger<CategoryController> _logger) : Controller
     {
-        private readonly ICategoryServices _categoryServices;
-        private readonly ILogger<CategoryController> _logger;
-
-        public CategoryController(ILogger<CategoryController> logger)
-        {
-            _logger = logger;
-            _categoryServices = new CategoryServices();
-        }
         public IActionResult Index()
         {
             var model = _categoryServices.GetCategories();
@@ -43,6 +35,24 @@ namespace HW17.Presentation.MVC.Controllers
                 ViewBag.AddError = result.Message;
             }
                 return View();
+        }
+
+        [HttpGet]
+        public IActionResult EditCategory(int categoryId) { 
+        
+            var model = _categoryServices.GetCategoryById(categoryId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditCategory(GetCategoryDto model)
+        {
+            var result = _categoryServices.Update(model.Id, model);
+            if (result)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
     }
 }

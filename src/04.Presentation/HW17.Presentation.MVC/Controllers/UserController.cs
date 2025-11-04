@@ -5,16 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HW17.Presentation.MVC.Controllers
 {
-    public class UserController : Controller
+    public class UserController(IUserServices _userServices, ILogger<UserController> _logger) : Controller
     {
-        private readonly IUserServices _userServices;
-        private readonly ILogger<UserController> _logger;
-
-        public UserController(ILogger<UserController> logger)
-        {
-            _logger = logger;
-            _userServices = new UserServices();
-        }
         public IActionResult Index()
         {
             return View();
@@ -22,6 +14,8 @@ namespace HW17.Presentation.MVC.Controllers
         public IActionResult Admin() { 
             return View();
         }
+
+        [HttpGet]
         public IActionResult GetUsers()
         {
             var model = _userServices.GetUsers();
@@ -34,6 +28,9 @@ namespace HW17.Presentation.MVC.Controllers
             return RedirectToAction("GetUsers");
         }
 
+
+
+        [HttpGet]
         public IActionResult AddUser()
         { 
             return View(new CreateUserDto());
@@ -53,9 +50,25 @@ namespace HW17.Presentation.MVC.Controllers
             }
             return View();
         }
-        public IActionResult EditUser()
+
+
+
+        [HttpGet]
+        public IActionResult EditUser(int userId)
         {
-            return View();
+            var model = _userServices.GetUserDetails(userId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(GetUserDto model)
+        {
+            var result = _userServices.Update(model.Id, model);
+            if (result)
+            {
+                return RedirectToAction("GetUsers");
+            }
+                return View(model);
         }
     }
 }

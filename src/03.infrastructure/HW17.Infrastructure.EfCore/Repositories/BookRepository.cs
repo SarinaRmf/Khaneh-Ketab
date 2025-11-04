@@ -10,13 +10,8 @@ using System.Threading.Tasks;
 
 namespace HW17.Infrastructure.EfCore.Repositories
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository(AppDbContext _context) : IBookRepository
     {
-        private readonly AppDbContext _context;
-        public BookRepository()
-        {
-            _context = new AppDbContext();
-        }
         public List<GetBookDtos> GetNewestBooks()
         {
             return _context.Books.OrderByDescending(b => b.Id)

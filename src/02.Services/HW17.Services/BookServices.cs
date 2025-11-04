@@ -12,15 +12,8 @@ using System.Threading.Tasks;
 
 namespace HW17.Services
 {
-    public class BookServices : IBookServices
+    public class BookServices(IBookRepository _repository, IFileService _fileService) : IBookServices
     {
-        private readonly IBookRepository _repository;
-        private readonly FileService _fileService;
-        public BookServices()
-        {
-            _repository = new BookRepository();
-            _fileService = new FileService();
-        }
         public List<GetBookDtos> GetNewestBooks() {
         
             return _repository.GetNewestBooks();

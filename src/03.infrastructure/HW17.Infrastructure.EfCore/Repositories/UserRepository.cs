@@ -12,13 +12,8 @@ using System.Threading.Tasks;
 
 namespace HW17.Infrastructure.EfCore.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(AppDbContext _context) : IUserRepository
     {
-        private readonly AppDbContext _context;
-        public UserRepository()
-        {
-            _context = new AppDbContext();
-        }
         public UserLoginDto? Login(string username, string password)
         {
             return _context.Users.Where(u => u.Username == username && u.PasswordHash == password)
@@ -88,6 +83,38 @@ namespace HW17.Infrastructure.EfCore.Repositories
         public void Delete(int userId) {
 
             _context.Users.Where(u => u.Id == userId).ExecuteDelete();
+        }
+
+        public bool Update(int userId, GetUserDto userDto)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+            if (user is not null) { 
+            
+                user.Email = userDto.Email;
+                user.Username = userDto.Username;
+                user.IsAdmin = userDto.IsAdmin;
+                user.ProfilePath = string.IsNullOrEmpty(userDto.ProfilePath) ? user.ProfilePath : userDto.ProfilePath;
+                user.PasswordHash = string.IsNullOrEmpty(userDto.Password) ? user.PasswordHash : userDto.Password ;
+                user.Phone.Value = userDto.Phone;
+                user.UptatedAt = DateTime.Now;
+
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+            
+        }
+
+        public string GetImageProfileUrl(int userId)
+        {
+            var imgAddress = _context.Users
+                .Where(u => u.Id == userId)
+                .Select(u => u.ProfilePath)
+                .FirstOrDefault();
+
+
+            return imgAddress;
         }
     }
 }

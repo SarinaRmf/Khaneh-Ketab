@@ -11,13 +11,8 @@ using System.Threading.Tasks;
 
 namespace HW17.Infrastructure.EfCore.Repositories
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository(AppDbContext _context) : ICategoryRepository
     {
-        private readonly AppDbContext _context;
-        public CategoryRepository()
-        {
-            _context = new AppDbContext();
-        }
         public List<GetCategoryDto> GetCategories() 
         { 
             return _context.Categories.Select(c => new GetCategoryDto
@@ -51,6 +46,43 @@ namespace HW17.Infrastructure.EfCore.Repositories
         public bool ExistBefore(string categoryName)
         {
             return _context.Categories.Any(c => c.Name == categoryName);
+        }
+
+        public bool Update(int categoryId, GetCategoryDto CategoryDto)
+        {
+            var result = _context.Categories
+                .Where(c => c.Id == categoryId)
+                .ExecuteUpdateAsync(setters => setters
+                .SetProperty(c => c.Name, CategoryDto.Name)
+                .SetProperty(c => c.Description, CategoryDto.Description)
+                .SetProperty(c => c.ImagePath, CategoryDto.ImagePath)
+                .SetProperty(c => c.UptatedAt, DateTime.Now));
+
+            return true;
+
+        }
+        public GetCategoryDto? GetCategoryById(int categoryId)
+        {
+            return _context.Categories.Where(c => c.Id == categoryId)
+                .AsNoTracking()
+                .Select(c => new GetCategoryDto
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,    
+                    ImagePath = c.ImagePath,
+                }).FirstOrDefault();
+        }
+
+        public string GetImageProfileUrl(int categoryId)
+        {
+            var imgAddress = _context.Categories
+                .Where(c => c.Id == categoryId)
+                .Select(c => c.ImagePath)
+                .FirstOrDefault();
+
+
+            return imgAddress;
         }
     }
 }

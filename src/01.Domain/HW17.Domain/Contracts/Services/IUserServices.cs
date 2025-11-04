@@ -13,5 +13,7 @@ namespace HW17.Domain.Contracts.Services
         ResultDto<bool> Register(CreateUserDto userDto);
         List<GetUserDto> GetUsers();
         void Delete(int userId);
+        GetUserDto? GetUserDetails(int userId);
+        bool Update(int userId, GetUserDto userDto);
     }
 }

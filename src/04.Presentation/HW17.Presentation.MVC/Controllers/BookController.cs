@@ -5,19 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HW17.Presentation.MVC.Controllers
 {
-    public class BookController : Controller
+    public class BookController(ILogger<BookController> _logger, ICategoryServices _categoryServices, IBookServices _bookServices) : Controller
     {
-        private readonly IBookServices _bookServices;
-        private readonly ICategoryServices _categoryServices;
-        private readonly ILogger<BookController> _logger;
-
-        public BookController(ILogger<BookController> logger)
-        {
-            _logger = logger;
-            _bookServices = new BookServices();
-            _categoryServices = new CategoryServices();
-        }
-
         [HttpGet]
         public IActionResult Add()
         {

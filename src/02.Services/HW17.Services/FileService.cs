@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using HW17.Domain.Contracts.Services;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,20 @@ using System.Threading.Tasks;
 
 namespace HW17.Services
 {
-    public class FileService 
+    public class FileService : IFileService
     {
+        public void Delete(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+                return;
 
+            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fileName);
+
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+            }
+        }
 
         public string Upload(IFormFile file, string folder)
         {

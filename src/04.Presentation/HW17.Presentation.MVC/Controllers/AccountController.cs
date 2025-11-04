@@ -6,15 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HW17.Presentation.MVC.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController(ILogger<AccountController> _logger, IUserServices userServices) : Controller
     {
-        private readonly ILogger<AccountController> _logger;
-        private readonly IUserServices userServices;
-        public AccountController(ILogger<AccountController> logger)
-        {
-            _logger = logger;
-            userServices = new UserServices();
-        }
 
         [HttpGet]
         public IActionResult Login()

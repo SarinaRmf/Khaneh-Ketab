@@ -7,22 +7,8 @@ using System.Diagnostics;
 
 namespace HW17.Presentation.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IBookServices _bookServices, ICategoryServices _categoryServices, ILogger<HomeController> _logger) : Controller
     {
-        
-        private readonly IBookServices _bookServices;
-        private readonly ICategoryServices _categoryServices;
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-            _bookServices = new BookServices();
-            _categoryServices = new CategoryServices();
-        }
-
-
-
         public IActionResult Index()
         {
             var model = new HomeViewModel

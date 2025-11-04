@@ -1,6 +1,7 @@
 ﻿using HW17.Domain.Contracts.Repositories;
 using HW17.Domain.Contracts.Services;
 using HW17.Domain.DTOs;
+using HW17.Domain.Entities;
 using HW17.Infrastructure.EfCore.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,8 @@ using System.Threading.Tasks;
 
 namespace HW17.Services
 {
-    public class CategoryServices : ICategoryServices
+    public class CategoryServices(ICategoryRepository _repository, IFileService _fileService) : ICategoryServices
     {
-        private readonly ICategoryRepository _repository;
-        private readonly FileService _fileService;
-        public CategoryServices()
-        {
-            _repository = new CategoryRepository();
-            _fileService = new FileService();
-        }
 
         public ResultDto<bool> Add(CreateCategoryDto createCategoryDto)
         {
@@ -39,5 +33,28 @@ namespace HW17.Services
         public List<GetCategoryDto> GetCategories() { 
             return _repository.GetCategories();
         }
+
+        public GetCategoryDto? GetCategoryById(int categoryId)
+        {
+            return _repository.GetCategoryById(categoryId); 
+        }
+
+        public bool Update(int categoryId, GetCategoryDto CategoryDto)
+        {
+            if (CategoryDto.Imgfile is not null)
+            {
+                var currentImageUrl = _repository.GetImageProfileUrl(categoryId);
+                _fileService.Delete(currentImageUrl);
+                CategoryDto.ImagePath = _fileService.Upload(CategoryDto.Imgfile, "Category");
+            }
+            else
+            {
+                CategoryDto.ImagePath = _repository.GetImageProfileUrl(categoryId);
+            }
+
+            var result = _repository.Update(categoryId, CategoryDto);
+            return result;
+        }
+
     }
 }

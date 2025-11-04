@@ -15,5 +15,7 @@ namespace HW17.Domain.Contracts.Repositories
         GetUserDto? GetUserDetails(int userId);
         List<GetUserDto> GetUsers();
         void Delete(int userId);
+        bool Update(int userId, GetUserDto userDto);
+        string GetImageProfileUrl(int userId);
     }
 }

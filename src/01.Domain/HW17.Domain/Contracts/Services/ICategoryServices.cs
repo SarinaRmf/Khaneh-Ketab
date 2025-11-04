@@ -12,5 +12,8 @@ namespace HW17.Domain.Contracts.Services
         List<GetCategoryDto> GetCategories();
         void Delete(int categoryId);
         ResultDto<bool> Add(CreateCategoryDto createCategoryDto);
+        GetCategoryDto? GetCategoryById(int categoryId);
+        bool Update(int categoryId, GetCategoryDto CategoryDto);
+
     }
 }
