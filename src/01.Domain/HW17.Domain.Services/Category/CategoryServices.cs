@@ -1,0 +1,56 @@
+﻿using HW17.Domain.Contracts.Repositories;
+using HW17.Domain.Core.Contracts.Services;
+using HW17.Domain.Core.DTOs;
+using HW17.Domain.Core.DTOs.CategoryDtos;
+
+namespace HW17.Services
+{
+    public class CategoryServices(ICategoryRepository _repository, IFileService _fileService) : ICategoryService
+    {
+
+        public ResultDto<bool> Add(CreateCategoryDto createCategoryDto)
+        {
+            if (_repository.ExistBefore(createCategoryDto.Name))
+            {
+
+                return new ResultDto<bool> { IsSuccess = false, Message = "دسته بندی از قبل موجود است" };
+            }
+            createCategoryDto.ImagePath = _fileService.Upload(createCategoryDto.Imgfile, "Category");
+            var result = _repository.Add(createCategoryDto);
+            return new ResultDto<bool> { IsSuccess = true };
+        }
+
+        public void Delete(int categoryId)
+        {
+            _repository.Delete(categoryId);
+        }
+
+        public List<GetCategoryDto> GetCategories()
+        {
+            return _repository.GetCategories();
+        }
+
+        public GetCategoryDto? GetCategoryById(int categoryId)
+        {
+            return _repository.GetCategoryById(categoryId);
+        }
+
+        public bool Update(int categoryId, GetCategoryDto CategoryDto)
+        {
+            if (CategoryDto.Imgfile is not null)
+            {
+                var currentImageUrl = _repository.GetImageProfileUrl(categoryId);
+                _fileService.Delete(currentImageUrl);
+                CategoryDto.ImagePath = _fileService.Upload(CategoryDto.Imgfile, "Category");
+            }
+            else
+            {
+                CategoryDto.ImagePath = _repository.GetImageProfileUrl(categoryId);
+            }
+
+            var result = _repository.Update(categoryId, CategoryDto);
+            return result;
+        }
+
+    }
+}

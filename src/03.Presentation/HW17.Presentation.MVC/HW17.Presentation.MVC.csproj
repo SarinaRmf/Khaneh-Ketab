@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.Domain\HW17.Domain.Core\HW17.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\01.Domain\HW17.Domain.Services\HW17.Domain.Services.csproj" />
+    <ProjectReference Include="..\..\02.infrastructure\HW17.Infra.Data.Repos.Ef\HW17.Infra.Data.Repos.Ef.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.Domain\HW17.Domain.Core\HW17.Domain.Core.csproj" />
+    <ProjectReference Include="..\HW17.Infra.DataAccess.Db.SqlServer.Ef\HW17.Infra.DataAccess.Db.SqlServer.Ef.csproj" />
+  </ItemGroup>
+
+</Project>
