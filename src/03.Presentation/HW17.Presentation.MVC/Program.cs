@@ -17,7 +17,7 @@ namespace HW17.Presentation.MVC
             builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=HW17;User ID=sa;Password=Az@r4180;Trust Server Certificate=True "));
+                options.UseSqlServer(""));
             builder.Services.AddScoped<ICategoryService, CategoryServices>();
             builder.Services.AddScoped<IBookService, BookServices>();
             builder.Services.AddScoped<IFileService, FileService>();
